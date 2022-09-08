@@ -1,0 +1,56 @@
+
+<h1>
+    {{
+        (heroe.id) ? 'Editar': 'Agregar'
+    }} 
+    Héroe 
+    <small>{{heroe.superhero}}</small></h1>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="40px">
+    <div fxFlex="50" fxLayout="column">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px"  >
+            <mat-form-field fxFlex="100" fxLayout.xs="column">
+                <mat-label>Super Héroe</mat-label>
+                <input matInput [(ngModel)]="heroe.superhero" type="text" required>
+            </mat-form-field>
+            <mat-form-field fxFlex="100">
+                <mat-label>Alter Ego</mat-label>
+                <input matInput [(ngModel)]="heroe.alter_ego" type="text" required>
+            </mat-form-field>
+        </div>
+        <mat-form-field>
+            <mat-label>Primera Aparición</mat-label>
+            <input matInput [(ngModel)]="heroe.first_appearance" type="text" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Personajes</mat-label>
+            <input matInput [(ngModel)]="heroe.characters" type="text" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Creador</mat-label>
+            <mat-select [(ngModel)]="heroe.publisher" required>
+                <mat-option *ngFor="let Publisher of Publishers" [value]="Publisher.id">
+                    {{Publisher.desc}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Foto Url</mat-label>
+            <input [(ngModel)]="heroe.alt_img" matInput type="url" required>
+        </mat-form-field>
+        <br>
+        <div fxLayout>
+            <button mat-raised-button color="primary" (click)="guardar()">
+                <mat-icon>edit</mat-icon> {{(heroe.id) ? 'Actualizar': 'Crear'}}
+            </button>
+            <div class="spacer"></div>
+            <button *ngIf="heroe.id" mat-raised-button color="warn" (click)="borrarHeroe()">
+                <mat-icon>remove</mat-icon>
+                Borrar
+            </button>
+        </div>
+    </div>
+    <div fxFlex="50">
+        <img [src]="heroe | imagen">
+    </div>
+</div>
